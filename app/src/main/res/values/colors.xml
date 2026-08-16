@@ -1,0 +1,7 @@
+<resources>
+    <color name="open_tv_background">#101418</color>
+    <color name="open_tv_surface">#1C252C</color>
+    <color name="open_tv_primary">#60D3C2</color>
+    <color name="open_tv_text">#F3F7F6</color>
+    <color name="open_tv_muted">#A6B5B2</color>
+</resources>

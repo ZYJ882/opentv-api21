@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.OpenTv" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">@color/open_tv_primary</item>
+        <item name="android:navigationBarColor">@color/open_tv_background</item>
+        <item name="android:statusBarColor">@color/open_tv_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

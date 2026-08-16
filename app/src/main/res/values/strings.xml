@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OpenTV API21</string>
+    <string name="source_hint">输入合法 M3U 播放列表 URL（仅 http/https）</string>
+    <string name="load_source">加载源</string>
+    <string name="search_hint">搜索频道</string>
+    <string name="empty_channels">尚未加载频道。请输入你有权使用的 M3U 源。</string>
+</resources>
