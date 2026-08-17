@@ -11,7 +11,7 @@
 | `OPENTV_KEYSTORE_BASE64` | 发布 `.jks` 文件的单行 Base64 编码 |
 | `OPENTV_STORE_PASSWORD` | 密钥库密码 |
 | `OPENTV_KEY_ALIAS` | 发布别名 |
-| `OPENTV_KEY_PASSWORD` | 别名私钥密码 |
+| `OPENTV_PRIVATE_KEY_PASSWORD` | 别名私钥密码 |
 
 ## 从源码 ZIP 发布
 
