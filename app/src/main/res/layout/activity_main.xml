@@ -1,18 +1,21 @@
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/open_tv_background">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal" android:padding="16dp">
-        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="3" android:orientation="vertical">
-            <TextView android:id="@+id/app_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="OpenTV · API 21" android:textColor="@color/open_tv_text" android:textSize="22sp" android:textStyle="bold" />
-            <androidx.media3.ui.PlayerView android:id="@+id/player_view" android:layout_width="match_parent" android:layout_height="0dp" android:layout_marginTop="12dp" android:layout_weight="1" android:background="#000000" app:show_buffering="when_playing" app:show_timeout="2500" />
-            <TextView android:id="@+id/now_playing" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="等待选择频道" android:textColor="@color/open_tv_text" android:textSize="16sp" />
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="horizontal">
-                <EditText android:id="@+id/source_input" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:hint="@string/source_hint" android:imeOptions="actionDone" android:inputType="textUri" android:padding="10dp" android:textColor="@color/open_tv_text" android:textColorHint="@color/open_tv_muted" />
-                <Button android:id="@+id/load_button" android:layout_width="wrap_content" android:layout_height="48dp" android:layout_marginStart="8dp" android:text="@string/load_source" />
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginStart="16dp" android:layout_weight="1" android:background="@color/open_tv_surface" android:orientation="vertical" android:padding="10dp">
-            <EditText android:id="@+id/search_input" android:layout_width="match_parent" android:layout_height="44dp" android:hint="@string/search_hint" android:imeOptions="actionSearch" android:inputType="text" android:padding="8dp" android:textColor="@color/open_tv_text" android:textColorHint="@color/open_tv_muted" />
-            <TextView android:id="@+id/empty_view" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="@string/empty_channels" android:textColor="@color/open_tv_muted" android:textSize="14sp" />
-            <androidx.recyclerview.widget.RecyclerView android:id="@+id/channel_list" android:layout_width="match_parent" android:layout_height="0dp" android:layout_marginTop="8dp" android:layout_weight="1" android:clipToPadding="false" />
-        </LinearLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+    <WebView android:id="@+id/douyin_web_view" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#000000" />
+    <ProgressBar android:id="@+id/web_progress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="4dp" android:max="100" android:progressTint="#FE2C55" android:visibility="gone" />
+    <LinearLayout android:id="@+id/chrome_bar" android:layout_width="match_parent" android:layout_height="60dp" android:layout_gravity="top" android:background="#E6101014" android:gravity="center_vertical" android:orientation="horizontal" android:paddingLeft="20dp" android:paddingRight="20dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/app_name" android:textColor="#FFFFFF" android:textSize="20sp" android:textStyle="bold" />
+        <Button android:id="@+id/action_home" style="@style/TvAction" android:text="@string/action_home" />
+        <Button android:id="@+id/action_refresh" style="@style/TvAction" android:text="@string/action_refresh" />
+        <Button android:id="@+id/action_privacy" style="@style/TvAction" android:text="@string/action_privacy" />
+        <Button android:id="@+id/action_clear_session" style="@style/TvAction" android:text="@string/action_clear" />
+        <Button android:id="@+id/action_exit" style="@style/TvAction" android:text="@string/action_exit" />
     </LinearLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
+    <LinearLayout android:id="@+id/loading_panel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:background="#E61A1A20" android:gravity="center" android:orientation="vertical" android:padding="28dp">
+        <ProgressBar android:layout_width="48dp" android:layout_height="48dp" android:indeterminateTint="#FE2C55" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:text="@string/loading" android:textColor="#FFFFFF" android:textSize="17sp" />
+    </LinearLayout>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|center_horizontal" android:layout_marginBottom="20dp" android:background="#B0000000" android:paddingLeft="16dp" android:paddingTop="8dp" android:paddingRight="16dp" android:paddingBottom="8dp" android:text="@string/remote_hint" android:textColor="#F0F0F0" android:textSize="13sp" />
+</FrameLayout>

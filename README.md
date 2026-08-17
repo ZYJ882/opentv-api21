@@ -1,37 +1,42 @@
-# OpenTV API21
+# myDV API21
 
-> **独立适配声明**：本项目参考了 [mytv-android/mytv-android](https://github.com/mytv-android/mytv-android) 公开 README 所描述的电视直播交互与功能方向，并为 **Android 5.0（API 21）及以上**设备重新设计、独立编写。它不隶属于原项目；原项目名称、商标及其相关权利归各自权利人所有。
+> **独立兼容实现声明**：本项目以 [`mytv-android/myDV`](https://github.com/mytv-android/myDV) 公开展示的产品功能与电视端交互为参照，为 **Android 5.0（API 21）及以上**设备独立编写。原 myDV 发布 APK 的公开元数据标注最低 API 23，而该仓库未公开 Android 源码；因此本项目不复制、移植或反向工程未公开实现。
 
-OpenTV API21 是一个面向旧版 Android TV、电视盒子与平板的原生 Java IPTV 播放器骨架。项目不包含、不分发也不推荐任何频道列表或受版权保护的视频内容；用户只能导入自己拥有使用权的 M3U 播放列表。
+`myDV API21` 是用于 Android TV、电视盒子与横屏设备的第三方短视频网页客户端。它通过系统 WebView 打开官方网页，并提供适合遥控器的方向滚动、确认播放/暂停、菜单控制栏、网页全屏与本机会话清除操作。
 
 | 项目 | 说明 |
 |---|---|
 | 最低系统 | **Android 5.0 / API 21** |
-| 开发语言 | Java + Android View XML |
-| 播放内核 | AndroidX Media3 ExoPlayer |
-| 输入方式 | 触屏、遥控器 D-pad、数字键 |
-| 数据保存 | 本地 SharedPreferences，仅保存收藏频道 URL |
+| 语言 | Java + Android View XML |
+| 内容路径 | 系统 WebView 加载官方网页，不内置私人接口或视频资源 |
+| 登录 | 仅由网页原生登录流程处理；不会读取、显示或上传 Cookie、账号或密码 |
+| 输入 | 电视遥控器 D-pad、确认、菜单、返回及媒体播放键 |
+| 数据控制 | 可在应用内一键删除本机 WebView Cookie、缓存和历史记录 |
 
-## 已实现功能
+## 遥控器操作
 
-应用提供合法 M3U URL 导入、频道列表、频道搜索、长按收藏、HLS 等由 Media3 支持的媒体播放和基础遥控器操作。上/下方向键切换频道，数字键直接选择前九个频道；频道列表中的长按操作可切换收藏状态。
+| 按键 | 行为 |
+|---|---|
+| 上 / 下 | 按页滚动网页内容 |
+| 左 / 右 | 小幅横向滚动 |
+| 确认 / 播放暂停 | 播放或暂停当前可见 HTML5 视频 |
+| 菜单 / 设置 | 显示或隐藏控制栏 |
+| 返回 | 退出网页全屏；首次打开控制栏；再次确认退出应用 |
 
 ## 构建
 
-请使用 Android Studio Ladybug 或更高版本打开本项目，并安装 Android SDK Platform 35。同步 Gradle 后即可安装到 Android 5.0 或更高版本设备。命令行构建可执行：
+需要 JDK 17 与 Android SDK Platform 35。调试构建：
 
 ```bash
-./gradlew assembleDebug
+./gradlew test assembleDebug
 ```
 
-## 兼容性取舍
+Release 构建由 GitHub Actions 从仓库 Secrets 中恢复稳定 keystore 后完成签名。请不要替换 `OPENTV_KEYSTORE_BASE64`、`OPENTV_STORE_PASSWORD`、`OPENTV_KEY_ALIAS` 与 `OPENTV_KEY_PASSWORD`，否则新 APK 无法覆盖安装同一发布链中的旧版本。
 
-原项目公开说明中标注 Android 6.0+，并使用较新的 Material 3 Expressive 方向。本项目为保持 API 21 支持，采用 Java、传统 View XML、AppCompat、RecyclerView 与 Media3；不依赖 Jetpack Compose、动态配色或 Android 6.0 后新增的系统能力。
+## 边界与安全
+
+本项目不实现私有 API 签名、设备指纹伪装、验证码绕过、Cookie 自动填充、账号抓取、DRM 规避或视频流抓取。网页内容、登录状态、可用性和适用规则由对应平台负责；请遵守平台条款和当地法律。
 
 ## 许可证与致谢
 
-本仓库中的新代码以 MIT License 发布。原项目的公开 README 说明其基于 MIT 许可组件进行迭代，但其当前公开仓库不提供应用源码。因此本项目不复制、移植或再发布原项目的未公开实现，仅保留透明的功能来源说明。请分别遵守你导入的播放列表、频道、图标和流媒体内容的许可与适用法律。
-
-## 安全与内容声明
-
-OpenTV API21 不内置远程订阅、广告、跟踪或账号系统。请只导入可信且合法的 HTTPS/HTTP M3U 地址；应用会直接请求你输入的地址并将频道流交由系统网络栈播放。
+本仓库中新写代码以 MIT License 发布。`myDV`、`抖音`及其相关商标归各自权利人所有；本项目不隶属于或获其背书。
