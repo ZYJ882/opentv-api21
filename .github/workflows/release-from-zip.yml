@@ -24,7 +24,7 @@ jobs:
     env:
       OPENTV_STORE_PASSWORD: ${{ secrets.OPENTV_STORE_PASSWORD }}
       OPENTV_KEY_ALIAS: ${{ secrets.OPENTV_KEY_ALIAS }}
-      OPENTV_KEY_PASSWORD: ${{ secrets.OPENTV_PRIVATE_KEY_PASSWORD }}
+      OPENTV_KEY_PASSWORD: ${{ secrets.OPENTV_KEY_PASSWORD }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
