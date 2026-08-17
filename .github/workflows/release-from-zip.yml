@@ -13,7 +13,14 @@ on:
         type: string
   push:
     branches: [main]
-    paths: ["incoming/*.zip"]
+    paths:
+      - "**"
+      - "!README.md"
+      - "!docs/**"
+      - "!incoming/*.apk"
+      - "!RELEASE_NOTES.md"
+      - "!.github/workflows/**"
+      - "!incoming/.gitkeep"
 
 permissions:
   contents: write
@@ -35,7 +42,9 @@ jobs:
         run: |
           set -euo pipefail
           ZIP="${{ inputs.source_zip }}"
-          if [ -z "$ZIP" ] && compgen -G "incoming/*.zip" > /dev/null; then ZIP="$(ls -t incoming/*.zip | head -n 1)"; fi
+          if [ -z "$ZIP" ] && [ "${{ github.event_name }}" = "push" ] && git show --pretty="" --name-only "$GITHUB_SHA" | grep -qE '^incoming/.*\.zip$'; then
+            ZIP="$(ls -t incoming/*.zip | head -n 1)"
+          fi
           if [ -n "$ZIP" ]; then
             test -f "$ZIP"
             mkdir -p "$RUNNER_TEMP/source"
@@ -93,4 +102,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${{ steps.build.outputs.tag }}" "${{ steps.build.outputs.apk }}#OpenTV API21 signed APK" --title "OpenTV API21 ${{ steps.build.outputs.tag }}" --generate-notes
+          test -s RELEASE_NOTES.md || { echo "RELEASE_NOTES.md 不存在或为空" >&2; exit 1; }
+          gh release create "${{ steps.build.outputs.tag }}" "${{ steps.build.outputs.apk }}#OpenTV API21 signed APK" --title "OpenTV API21 ${{ steps.build.outputs.tag }}" --notes-file RELEASE_NOTES.md --latest
